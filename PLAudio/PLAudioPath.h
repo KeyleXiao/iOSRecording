@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PLAudioPath : NSObject
-+ (NSString *)recordPathOrigin;  
-//+ (NSString *)recordPathOriginToAMR;
-//+ (NSString *)recordPathAMRToWAV;
+
++ (NSString *)recordPathOrigin;
+
 @end

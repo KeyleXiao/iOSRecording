@@ -29,45 +29,6 @@
 }
 
 
-//+ (NSString *)recordPathOriginToAMR{
-//    NSString * filePath;
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSString *str1 = NSHomeDirectory();
-//    filePath = [NSString stringWithFormat:@"%@/Documents/RecordTest/recordTest.amr",str1];
-//    
-//    if(![fileManager fileExistsAtPath:filePath]){
-//        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//        NSString *directryPath = [path stringByAppendingPathComponent:@"RecordTest"];
-//        [fileManager createDirectoryAtPath:directryPath withIntermediateDirectories:YES attributes:nil error:nil];
-//        NSString *filePath = [directryPath stringByAppendingPathComponent:@"recordTest.amr"];
-//        [fileManager createFileAtPath:filePath contents:nil attributes:nil];
-//    }
-//    
-//    [self skipICloud:filePath];
-//    
-//    return filePath;
-//}
-
-//
-//+ (NSString *)recordPathAMRToWAV{
-//    NSString * filePath;
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSString *str1 = NSHomeDirectory();
-//    filePath = [NSString stringWithFormat:@"%@/Documents/RecordTest/recordTest.wav",str1];
-//    
-//    if(![fileManager fileExistsAtPath:filePath]){
-//        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//        NSString *directryPath = [path stringByAppendingPathComponent:@"RecordTest"];
-//        [fileManager createDirectoryAtPath:directryPath withIntermediateDirectories:YES attributes:nil error:nil];
-//        NSString *filePath = [directryPath stringByAppendingPathComponent:@"recordTest.wav"];
-//        [fileManager createFileAtPath:filePath contents:nil attributes:nil];
-//    }
-//    
-//    [self skipICloud:filePath];
-//    
-//    return filePath;
-//}
-
 /**
  *
  For more information, please see https://developer.apple.com/library/ios/#qa/qa1719/_index.html

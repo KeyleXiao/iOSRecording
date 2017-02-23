@@ -61,6 +61,7 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     }
     return self;
 }
+
 - (void)dealloc
 {
     _recorder.delegate = nil;
@@ -86,7 +87,7 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     self.recordFailed = failed;
     self.recordMeters = meters;
     self.recordPath = path;
-    self.isNeedConvert=YES;
+   
     if (self.isEnableMic) {
         /**
          *
@@ -209,46 +210,6 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     NSURL * url = [NSURL fileURLWithPath:self.recordPath];
     
     NSData *data = [NSData dataWithContentsOfURL:url];
- 
-//    if (_isNeedConvert) {
-//        if ([VoiceConverter ConvertWavToAmr:[PLAudioPath recordPathOrigin] amrSavePath:[PLAudioPath recordPathOriginToAMR]]) {
-//            
-//            
-//               NSData *compressedData =[NSData dataWithContentsOfURL:url];
-//            
-//            [compressedData writeToURL:url atomically:NO];
-//            
-//            if (![NSThread isMainThread]) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if (self.recordSuccess) {
-//                        self.recordSuccess(compressedData);
-//                    }
-//                });
-//            }else{
-//                if (self.recordSuccess) {
-//                    self.recordSuccess(compressedData);
-//                }
-//            }
-//            [[AVAudioSession sharedInstance] setActive:NO error:nil];
-//            [self stopTimer];}
-//    }else{
-//        
-//    
-//        
-//        if (![NSThread isMainThread]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (self.recordSuccess) {
-//                    self.recordSuccess(data);
-//                }
-//            });
-//        }else{
-//            if (self.recordSuccess) {
-//                self.recordSuccess(data);
-//            }
-//        }
-//        [[AVAudioSession sharedInstance] setActive:NO error:nil];
-//        [self stopTimer];
-//    }
     
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{

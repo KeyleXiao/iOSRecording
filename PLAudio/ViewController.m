@@ -27,27 +27,9 @@
     
     audioRecorder = [[PLAudioRecorder alloc] init];
     
-    /**
-     *  是否需要转码的逻辑判断，默认为NO
-     当为NO是录制的格式是默认的wav格式，这种格式iOS是支持的；
-     因为iOS支持的格式基本android都不支持，android支持的iOS全部都不支持，但是为了实现与android平台的IM互通，所以把iOS支持的wav转为android支持的amr
-     所以这里可以设置isNeedConvert为yes，表示在录制完成后会转换成amr格式
-     */
-    //audioRecorder.isNeedConvert=YES;
-    audioRecorder.isNeedConvert=NO;
-    
-    
-    
+
     audioPlayer = [[PLAudioPlayer alloc] init];
-    /**
-     *  是否需要转码的逻辑判断，默认为NO
-     当为NO是录制的格式是默认的wav格式，这种格式iOS是支持的；
-     因为iOS支持的格式基本android都不支持，android支持的iOS全部都不支持，但是为了实现与android平台的IM互通，所以把iOS支持的wav转为android支持的amr
-     所以这里可以设置isNeedConvert为yes，表示在播放之前，会把amr格式的转换为wav格式
-     */
-    //audioPlayer.isNeedConvert=YES;
-//    audioPlayer.isNeedConvert=NO;
-    
+
     
     label=[[UILabel alloc] initWithFrame:CGRectMake(200, 120, 100, 100)];
     label.backgroundColor=[UIColor whiteColor];
