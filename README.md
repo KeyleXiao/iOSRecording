@@ -9,13 +9,13 @@
 
 PLAudioPlayer类是音频播放的类，首先需要初始化。
 
-···
+```
 	audioRecorder = [[PLAudioRecorder alloc] init];
-···
+```
 
 PLAudioPlayer类提供播放音频和停止播放的方法，
 
-···
+```
     // 播放音频
 	
     - (void)startPlayAudioFile:(NSString *)fileName
@@ -25,11 +25,11 @@ PLAudioPlayer类提供播放音频和停止播放的方法，
 
 	// 停止播放
 	- (void)stopPlay;
-···
+```
 
 
 startPlayAudioFile使用如下
-···
+```
  
     [audioPlayer startPlayAudioFile:[PLAudioPath recordPathOriginToAMR]
                        updateMeters:^(float meters){
@@ -42,13 +42,13 @@ startPlayAudioFile使用如下
                                  } ];
 
 
-···                                     
+```                                     
    
    
    
 #### PLAudioPlayer类的使用
 
-···
+```
 PLAudioPlayer类是音频录制的类，首先需要初始化，初始化时，默认在录制为WAV格式。
 
     audioPlayer = [[PLAudioPlayer alloc] init];
@@ -64,11 +64,11 @@ PLAudioPlayer类提供开始录音和结束录音的方法，
     - (void)stopRecord;//结束录音
 
 
-···
+```
 
 startRecordWithFilePath使用如下
 
-···
+```
     [audioRecorder startRecordWithFilePath:[PLAudioPath recordPathOrigin]
                                    updateMeters:^(float meters){
                                        //实时返回录制时声音的平均功率
@@ -81,4 +81,4 @@ startRecordWithFilePath使用如下
                                          }];
                                         
 
-···
+```
