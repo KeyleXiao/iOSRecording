@@ -22,9 +22,11 @@ extern NSString * const RecordErrorPermissionDenied;//用户禁用麦克风的NS
  所以这里可以设置isNeedConvert为yes，表示在录制完成后会转换成amr格式
  */
 @property BOOL isNeedConvert;
+
 - (void)startRecordWithFilePath:(NSString *)path
                    updateMeters:(RecordWithMeters)meters
                         success:(RecordSuccess)success
                          failed:(RecordFailed)failed;//开始录音
+
 - (void)stopRecord;//结束录音
 @end

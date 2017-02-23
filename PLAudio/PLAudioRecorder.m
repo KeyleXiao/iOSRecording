@@ -11,7 +11,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "VoiceConverter.h"
+//#import "VoiceConverter.h"
 NSString * const RecordErrorStart = @"RecordErrorStart";
 NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
 
@@ -210,45 +210,61 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     
     NSData *data = [NSData dataWithContentsOfURL:url];
  
-    if (_isNeedConvert) {
-        if ([VoiceConverter ConvertWavToAmr:[PLAudioPath recordPathOrigin] amrSavePath:[PLAudioPath recordPathOriginToAMR]]) {
-            
-            
-               NSData *compressedData =[NSData dataWithContentsOfURL:url];
-            
-            [compressedData writeToURL:url atomically:NO];
-            
-            if (![NSThread isMainThread]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (self.recordSuccess) {
-                        self.recordSuccess(compressedData);
-                    }
-                });
-            }else{
-                if (self.recordSuccess) {
-                    self.recordSuccess(compressedData);
-                }
-            }
-            [[AVAudioSession sharedInstance] setActive:NO error:nil];
-            [self stopTimer];}
-    }else{
-        
+//    if (_isNeedConvert) {
+//        if ([VoiceConverter ConvertWavToAmr:[PLAudioPath recordPathOrigin] amrSavePath:[PLAudioPath recordPathOriginToAMR]]) {
+//            
+//            
+//               NSData *compressedData =[NSData dataWithContentsOfURL:url];
+//            
+//            [compressedData writeToURL:url atomically:NO];
+//            
+//            if (![NSThread isMainThread]) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    if (self.recordSuccess) {
+//                        self.recordSuccess(compressedData);
+//                    }
+//                });
+//            }else{
+//                if (self.recordSuccess) {
+//                    self.recordSuccess(compressedData);
+//                }
+//            }
+//            [[AVAudioSession sharedInstance] setActive:NO error:nil];
+//            [self stopTimer];}
+//    }else{
+//        
+//    
+//        
+//        if (![NSThread isMainThread]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (self.recordSuccess) {
+//                    self.recordSuccess(data);
+//                }
+//            });
+//        }else{
+//            if (self.recordSuccess) {
+//                self.recordSuccess(data);
+//            }
+//        }
+//        [[AVAudioSession sharedInstance] setActive:NO error:nil];
+//        [self stopTimer];
+//    }
     
-        
-        if (![NSThread isMainThread]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.recordSuccess) {
-                    self.recordSuccess(data);
-                }
-            });
-        }else{
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             if (self.recordSuccess) {
                 self.recordSuccess(data);
             }
+        });
+    }else{
+        if (self.recordSuccess) {
+            self.recordSuccess(data);
         }
-        [[AVAudioSession sharedInstance] setActive:NO error:nil];
-        [self stopTimer];
     }
+    [[AVAudioSession sharedInstance] setActive:NO error:nil];
+    [self stopTimer];
+
+    
     
 }
 

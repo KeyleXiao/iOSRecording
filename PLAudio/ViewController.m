@@ -33,7 +33,8 @@
      因为iOS支持的格式基本android都不支持，android支持的iOS全部都不支持，但是为了实现与android平台的IM互通，所以把iOS支持的wav转为android支持的amr
      所以这里可以设置isNeedConvert为yes，表示在录制完成后会转换成amr格式
      */
-    audioRecorder.isNeedConvert=YES;
+    //audioRecorder.isNeedConvert=YES;
+    audioRecorder.isNeedConvert=NO;
     
     
     
@@ -44,7 +45,8 @@
      因为iOS支持的格式基本android都不支持，android支持的iOS全部都不支持，但是为了实现与android平台的IM互通，所以把iOS支持的wav转为android支持的amr
      所以这里可以设置isNeedConvert为yes，表示在播放之前，会把amr格式的转换为wav格式
      */
-    audioPlayer.isNeedConvert=YES;
+    //audioPlayer.isNeedConvert=YES;
+//    audioPlayer.isNeedConvert=NO;
     
     
     label=[[UILabel alloc] initWithFrame:CGRectMake(200, 120, 100, 100)];
@@ -138,7 +140,7 @@
 
 -(void)startPlayBtAction{
 
-    [audioPlayer startPlayAudioFile:[PLAudioPath recordPathOriginToAMR]
+    [audioPlayer startPlayAudioFile:[PLAudioPath recordPathOrigin]
                        updateMeters:^(float meters){
                            [self updateVolumeUI:meters];
                            

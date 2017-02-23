@@ -10,6 +10,6 @@
 
 @interface PLAudioPath : NSObject
 + (NSString *)recordPathOrigin;  
-+ (NSString *)recordPathOriginToAMR;
-+ (NSString *)recordPathAMRToWAV;
+//+ (NSString *)recordPathOriginToAMR;
+//+ (NSString *)recordPathAMRToWAV;
 @end
