@@ -17,7 +17,9 @@
 @property (nonatomic, strong) AVAudioPlayer *player;
 @property (nonatomic, strong) NSDate *startPlayDate;
 @property (nonatomic) dispatch_source_t playTimer;
+
 @end
+
 @implementation PLAudioPlayer
 
 
@@ -40,7 +42,9 @@
 {
     
     BOOL isSuccess = [self playWithFileName:fileName];
-    if (!isSuccess && self.playFailed) {
+    
+    //if (!isSuccess && self.playFailed) {
+    if (!isSuccess || self.playFailed) {
         self.playFailed(nil);
     }
 }
@@ -51,39 +55,49 @@
 -(BOOL)playWithFileName:(NSString *)fileName {
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:NULL];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
+    
     if (!fileName) return NO;
+    
     NSData *data;
     NSURL * url = [NSURL fileURLWithPath:fileName];
     data=[NSData dataWithContentsOfURL:url];
+    
     [self stopPlay];
     
     NSError *error = nil;
     
-    
     self.player = [[AVAudioPlayer alloc] initWithData:data error:&error];
     
     if (error) {
+        
         self.player = nil;
         return NO;
+        
     } else {
         self.player.delegate = self;
         self.player.volume = 1.0;
+        
         BOOL flag = YES;
         self.player.meteringEnabled = YES;
         [self.player prepareToPlay];
         flag = [self.player play];
+        
         if (flag) {
             
             self.startPlayDate = [NSDate date];
             self.playTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
             dispatch_source_set_timer(self.playTimer, DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+            
             dispatch_source_set_event_handler(self.playTimer, ^{
+                
                 [_player updateMeters];
                 self.playMeters([_player averagePowerForChannel:0]);
+                
             });
-            dispatch_resume(self.playTimer);
             
+            dispatch_resume(self.playTimer);
         }
+        
         return flag;
     }
 }

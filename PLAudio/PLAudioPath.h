@@ -10,6 +10,7 @@
 
 @interface PLAudioPath : NSObject
 
-+ (NSString *)recordPathOrigin;
++ (NSString *)recordPathOrigin: (NSString* )fileFullPath;
++ (NSString *)recordPathOriginTest;
 
 @end

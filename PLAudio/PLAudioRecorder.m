@@ -40,6 +40,7 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     self = [super init];
     if (self) {
         AudioSessionInitialize(NULL, NULL, NULL, NULL);
+        
         if ([[UIDevice currentDevice].systemVersion floatValue] < 6.0) {
             AVAudioSession* session = [AVAudioSession sharedInstance];
             [session setDelegate:self];
@@ -123,13 +124,13 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     [[AVAudioSession sharedInstance] setActive:YES error:nil];//启动音频会话管理,此时会阻断后台音乐的播放
     UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;//扬声器
     AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
+    
     /**
      *
      使用kAudioSessionProperty_OverrideAudioRoute时，当发生任何中断如插拔耳机时，audio route就会重置回听筒，你必须再设置一次。
      使用kAudioSessionProperty_OverrideCategoryDefaultToSpeaker则除非你更改category，否则会一直生效。
      
      */
-    
     NSDictionary *recordSetting = @{
                                     AVFormatIDKey               : @(kAudioFormatLinearPCM),
                                     AVSampleRateKey             : @(8000.f),
@@ -182,8 +183,6 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
                 self.recordMeters([self.recorder averagePowerForChannel:0]);
             });
             dispatch_resume(self.recordTimer);
-
-        
         }
     }
 }
@@ -225,8 +224,6 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     [[AVAudioSession sharedInstance] setActive:NO error:nil];
     [self stopTimer];
 
-    
-    
 }
 
 #pragma mark - AVAudioRecorderDelegate
@@ -245,6 +242,7 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     
     [self stopTimer];
 }
+
 
 - (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder
 {

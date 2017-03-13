@@ -90,7 +90,7 @@
 -(void)startRecordBtAction{
     
 
-    [audioRecorder startRecordWithFilePath:[PLAudioPath recordPathOrigin]
+    [audioRecorder startRecordWithFilePath:[PLAudioPath recordPathOriginTest]
                                    updateMeters:^(float meters){
                                        [self updateVolumeUI:meters];
 
@@ -122,7 +122,7 @@
 
 -(void)startPlayBtAction{
 
-    [audioPlayer startPlayAudioFile:[PLAudioPath recordPathOrigin]
+    [audioPlayer startPlayAudioFile:[PLAudioPath recordPathOriginTest]
                        updateMeters:^(float meters){
                            [self updateVolumeUI:meters];
                            

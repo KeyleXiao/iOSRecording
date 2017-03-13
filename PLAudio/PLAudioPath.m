@@ -9,11 +9,13 @@
 #import "PLAudioPath.h"
 #import <sys/xattr.h>
 @implementation PLAudioPath
-+ (NSString *)recordPathOrigin{
+
++ (NSString *)recordPathOriginTest{
     NSString * filePath;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *str1 = NSHomeDirectory();
     filePath = [NSString stringWithFormat:@"%@/Documents/RecordTest/recordTest.wav",str1];
+    
     
     if(![fileManager fileExistsAtPath:filePath]){
         NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
@@ -26,6 +28,22 @@
     [self skipICloud:filePath];
     
     return filePath;
+}
+
++ (NSString *)recordPathOrigin: (NSString* )fileFullPath
+{
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if(![fileManager fileExistsAtPath:fileFullPath]){
+        
+        [fileManager createFileAtPath:fileFullPath contents:nil attributes:nil];
+        
+    }
+    
+    [self skipICloud:fileFullPath];
+    
+    return fileFullPath;
 }
 
 

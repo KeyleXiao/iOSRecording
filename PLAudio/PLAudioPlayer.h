@@ -12,6 +12,7 @@
 typedef void (^AudioPlayerFailed)(NSError *error);
 typedef void (^AudioPlayerSuccess)();
 typedef void (^AudioPlayerWithMeters)(float meters);//实时返回当前音频的平均功率
+
 @interface PLAudioPlayer : NSObject<AVAudioPlayerDelegate>
 
 
@@ -26,10 +27,6 @@ updateMeters:(AudioPlayerWithMeters)meters
 
 // 停止播放
 - (void)stopPlay;
-
-
-
-
 
 
 
