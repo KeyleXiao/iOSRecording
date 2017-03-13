@@ -63,6 +63,16 @@ static RecordingHelper* instance;
     [self.player stopPlay];
 }
 
+- (void) PausePlay
+{
+    [self.player pausePlay];
+}
+
+- (void) ResumePlay
+{
+    [self.player resumePlay];
+}
+
 - (void) StopRecording
 {
     [self.recorder stopRecord];

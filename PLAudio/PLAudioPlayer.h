@@ -22,6 +22,9 @@ typedef void (^AudioPlayerWithMeters)(float meters);//实时返回当前音频�
 // 停止播放
 - (void)stopPlay;
 
+- (void)pausePlay;
+
+- (void)resumePlay;
 
 
 @end

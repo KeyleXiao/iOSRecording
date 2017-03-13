@@ -81,7 +81,7 @@
                 [_player updateMeters];
                 
             });
-            
+
             dispatch_resume(self.playTimer);
         }
         
@@ -102,8 +102,20 @@
         self.player.delegate = nil;
         self.player = nil;
     }
-    
 }
+
+- (void)pausePlay{
+    if (self.player) {
+        [self.player pause];
+    }
+}
+
+- (void)resumePlay{
+    if (self.player) {
+        [self.player play];
+    }
+}
+
 
 
 #pragma mark AVAudioPlayerDelegate

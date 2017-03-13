@@ -24,5 +24,7 @@
 - (void) StartRecording:(NSString *) fullPath;
 - (void) PlayRecording:(NSString *) fullPath;
 - (void) StopPlay;
+- (void) PausePlay;
+- (void) ResumePlay;
 @end
 
