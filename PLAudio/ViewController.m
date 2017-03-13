@@ -7,14 +7,13 @@
 //
 
 #import "ViewController.h"
-#import "PLAudioPlayer.h"
-#import "PLAudioRecorder.h"
+#import "RecordingHelper.h"
 
 @interface ViewController (){
-    PLAudioRecorder *audioRecorder;
-    PLAudioPlayer *audioPlayer;
+    
+    RecordingHelper* helper;
     UILabel *label;
-
+    
 }
 
 @end
@@ -25,21 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    audioRecorder = [[PLAudioRecorder alloc] init];
-    
-
-    audioPlayer = [[PLAudioPlayer alloc] init];
-
-    
-    label=[[UILabel alloc] initWithFrame:CGRectMake(200, 120, 100, 100)];
-    label.backgroundColor=[UIColor whiteColor];
-    label.textColor=[UIColor colorWithRed:0.26 green:0.52 blue:0.96 alpha:1];
-    label.text=@"大";
-    label.textAlignment=NSTextAlignmentCenter;
-    label.font=[UIFont systemFontOfSize:10];
-    [self.view addSubview:label];
-    label.hidden=YES;
-  
+    helper = [RecordingHelper ShareInstance];
     
     UIButton *startRecordBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:startRecordBt];
@@ -61,7 +46,6 @@
     
     
     
-    
     UIButton *startPlayBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:startPlayBt];
     startPlayBt.frame=CGRectMake(50, 210, 100, 40);
@@ -72,128 +56,54 @@
     
     
     
-    
-    
-    
     UIButton *endPlayBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:endPlayBt];
     endPlayBt.frame=CGRectMake(50, 260, 100, 40);
-    [endPlayBt setTitle:@"结束播放" forState:UIControlStateNormal];
-    [endPlayBt addTarget:self action:@selector(endPlayBtAction) forControlEvents:UIControlEventTouchUpInside];
+    [endPlayBt setTitle:@"停止播放" forState:UIControlStateNormal];
+    [endPlayBt addTarget:self action:@selector(stopPlayBtAction) forControlEvents:UIControlEventTouchUpInside];
     endPlayBt.backgroundColor=[UIColor colorWithRed:0.37 green:0.75 blue:0.38 alpha:1];
     [endPlayBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
- 
-
-     
+    
+    UIButton *checkFileBt=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:checkFileBt];
+    checkFileBt.frame=CGRectMake(50, 310, 100, 40);
+    [checkFileBt setTitle:@"检查文件" forState:UIControlStateNormal];
+    [checkFileBt addTarget:self action:@selector(checkFilesBtAction) forControlEvents:UIControlEventTouchUpInside];
+    checkFileBt.backgroundColor=[UIColor colorWithRed:0.37 green:0.75 blue:0.38 alpha:1];
+    [checkFileBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    self.input.text =path;
 }
+
+-(void)checkFilesBtAction
+{
+    self.display.text = [helper GetDeviceAudio:self.input.text];
+}
+
 -(void)startRecordBtAction{
     
-
-    [audioRecorder startRecordWithFilePath:[PLAudioPath recordPathOriginTest]
-                                   updateMeters:^(float meters){
-                                       [self updateVolumeUI:meters];
-
-                                       
-                                   }
-                                        success:^(NSData *recordData){
-                                            NSLog(@"录音成功");
-                                             label.hidden=YES;
-
-                                            
-                                        }
-                                         failed:^(NSError *error){
-                                                  NSLog(@"录音失败");
-                                              label.hidden=YES;
-
-                                             
-                                             
-                                         }];
-    
-    
-
+    self.display.text = @"开始录音。。。。";
+    [helper StartRecording:[PLAudioPath recordPathOrigin:self.input.text]];
 }
 
 
 -(void)endRecordBtAction{
-    [audioRecorder stopRecord];
-    
+    self.display.text = @"结束录音。。。。";
+    [helper StopRecording];
 }
 
 -(void)startPlayBtAction{
-
-    [audioPlayer startPlayAudioFile:[PLAudioPath recordPathOriginTest]
-                       updateMeters:^(float meters){
-                           [self updateVolumeUI:meters];
-                           
-                       }
-                                 success:^{
-                                     // 停止UI的播放
-//
-                                     NSLog(@"播放成功");
-                                      label.hidden=YES;
-
-                                    
-
-                                 } failed:^(NSError *error) {
-                                     // 停止UI的播放
-                                      label.hidden=YES;
-
-                                     NSLog(@"播放失败");
-                                 } ];
-
-    
-    
-
-    
-    
+    self.display.text = @"开始播放。。。。";
+    [helper PlayRecording:[PLAudioPath recordPathOrigin:self.input.text]];
 }
 
-
--(void)endPlayBtAction{
-    [audioPlayer stopPlay];
-    
+-(void)stopPlayBtAction{
+    self.display.text = @"停止播放。。。。";
+    [helper StopPlay];
 }
 
-
--(void)updateVolumeUI:(float )meters{
-    
-    float m = fabsf(meters);
-    
-    NSInteger iconNumber = 3;
-    
-    float scale = (60 - m )/60;
-    
-    if (scale <= 0.2f ){
-        iconNumber = 1;
-    } else if (scale > 0.2f && scale <= 0.4f) {
-        iconNumber = 2;
-    }else if (scale > 0.4f && scale <= 0.6f) {
-        iconNumber = 3;
-    }else if (scale > 0.6f && scale <= 0.8f) {
-        iconNumber = 4;
-    } else {
-        iconNumber = 5;
-    }
-    label.hidden=NO;
-    if (iconNumber==1) {
-        label.font=[UIFont systemFontOfSize:10    ];
-    }else if (iconNumber==2){
-        
-        label.font=[UIFont systemFontOfSize:15    ];
-    }else if (iconNumber==3){
-        label.font=[UIFont systemFontOfSize:25    ];
-        
-    }else if (iconNumber==4){
-        label.font=[UIFont systemFontOfSize:45    ];
-        
-    }else if (iconNumber==5){
-        label.font=[UIFont systemFontOfSize:85    ];
-        
-    }
-    
-    
-}
 
 
 - (void)didReceiveMemoryWarning {

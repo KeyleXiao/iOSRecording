@@ -17,10 +17,7 @@ extern NSString * const RecordErrorPermissionDenied;//用户禁用麦克风的NS
 @interface PLAudioRecorder : NSObject
 
 
-- (void)startRecordWithFilePath:(NSString *)path
-                   updateMeters:(RecordWithMeters)meters
-                        success:(RecordSuccess)success
-                         failed:(RecordFailed)failed;//开始录音
+- (void)startRecordWithFilePath:(NSString *)path success:(RecordSuccess)success failed:(RecordFailed)failed;//开始录音
 
 - (void)stopRecord;//结束录音
 @end

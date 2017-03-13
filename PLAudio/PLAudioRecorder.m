@@ -20,7 +20,7 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, copy) RecordSuccess recordSuccess;
 @property (nonatomic, copy) RecordFailed recordFailed;
-@property (nonatomic, copy) RecordWithMeters recordMeters;
+//@property (nonatomic, copy) RecordWithMeters recordMeters;
 @property (nonatomic) dispatch_source_t recordTimer;
 @property (nonatomic, strong) NSDate *startRecordDate;
 @property (nonatomic, copy) NSString * recordPath;
@@ -78,15 +78,12 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
 
 
 #pragma mark - record methods
-- (void)startRecordWithFilePath:(NSString *)path
-                   updateMeters:(RecordWithMeters)meters
-                        success:(RecordSuccess)success
-                         failed:(RecordFailed)failed
+- (void)startRecordWithFilePath:(NSString *)path success:(RecordSuccess)success failed:(RecordFailed)failed
 {
    
     self.recordSuccess = success;
     self.recordFailed = failed;
-    self.recordMeters = meters;
+//    self.recordMeters = meters;
     self.recordPath = path;
    
     if (self.isEnableMic) {
@@ -118,7 +115,7 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     }
 }
 
-- (void)recordWithFilePath:(NSString *)path
+- (void)recordWithFilePath:(NSString *) path
 {
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:NULL];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];//启动音频会话管理,此时会阻断后台音乐的播放
@@ -178,10 +175,12 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
             self.startRecordDate = [NSDate date];
             self.recordTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
             dispatch_source_set_timer(self.recordTimer, DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-            dispatch_source_set_event_handler(self.recordTimer, ^{
-                [self.recorder updateMeters];
-                self.recordMeters([self.recorder averagePowerForChannel:0]);
-            });
+            
+//            dispatch_source_set_event_handler(self.recordTimer, ^{
+//                [self.recorder updateMeters];
+//                self.recordMeters([self.recorder averagePowerForChannel:0]);
+//            });
+            
             dispatch_resume(self.recordTimer);
         }
     }

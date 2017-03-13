@@ -13,7 +13,6 @@
 
 @property (nonatomic, copy) AudioPlayerSuccess playSuccess;
 @property (nonatomic, copy) AudioPlayerFailed playFailed;
-@property (nonatomic, copy) AudioPlayerWithMeters playMeters;
 @property (nonatomic, strong) AVAudioPlayer *player;
 @property (nonatomic, strong) NSDate *startPlayDate;
 @property (nonatomic) dispatch_source_t playTimer;
@@ -22,28 +21,17 @@
 
 @implementation PLAudioPlayer
 
-
-
 - (void)dealloc{
     _player.delegate = nil;
 }
 
-
-
-- (BOOL)isPlaying {
-    return [self.player isPlaying];
-}
-
-
 - (void)startPlayAudioFile:(NSString *)fileName
-              updateMeters:(AudioPlayerWithMeters)meters
                    success:(AudioPlayerSuccess)success
                     failed:(AudioPlayerFailed)failed
 {
     
     BOOL isSuccess = [self playWithFileName:fileName];
     
-    //if (!isSuccess && self.playFailed) {
     if (!isSuccess || self.playFailed) {
         self.playFailed(nil);
     }
@@ -91,7 +79,6 @@
             dispatch_source_set_event_handler(self.playTimer, ^{
                 
                 [_player updateMeters];
-                self.playMeters([_player averagePowerForChannel:0]);
                 
             });
             

@@ -16,14 +16,8 @@ typedef void (^AudioPlayerWithMeters)(float meters);//实时返回当前音频�
 @interface PLAudioPlayer : NSObject<AVAudioPlayerDelegate>
 
 
-//是否正在播放音频
-- (BOOL)isPlaying;
-
 // 播放音频
-- (void)startPlayAudioFile:(NSString *)fileName
-updateMeters:(AudioPlayerWithMeters)meters
-                   success:(AudioPlayerSuccess)success
-                    failed:(AudioPlayerFailed)failed ;
+- (void)startPlayAudioFile:(NSString *)fileName success: (AudioPlayerSuccess)success failed:(AudioPlayerFailed)failed ;
 
 // 停止播放
 - (void)stopPlay;

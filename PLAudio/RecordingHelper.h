@@ -22,5 +22,7 @@
 - (void) DeleteDeviceAudio:(NSString*) audioFullName;
 - (void) StopRecording;
 - (void) StartRecording:(NSString *) fullPath;
+- (void) PlayRecording:(NSString *) fullPath;
+- (void) StopPlay;
 @end
 

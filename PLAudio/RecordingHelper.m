@@ -6,6 +6,7 @@
 //  Copyright © 2017 apple. All rights reserved.
 //
 
+#import "PLAudioPath.h"
 #import "RecordingHelper.h"
 #import "PLAudioPlayer.h"
 #import "PLAudioRecorder.h"
@@ -30,15 +31,20 @@ static RecordingHelper* instance;
     return instance;
 }
 
+- (void) PlayRecording:(NSString *) fullPath
+{
+    [self.player startPlayAudioFile:fullPath success:^{
+        
+    } failed:^(NSError *error) {
+        
+    }];
+}
 
 
 - (void) StartRecording:(NSString *) fullPath
 {
     [self.recorder
      startRecordWithFilePath:fullPath
-     updateMeters:^(float meters){
-         [self updateVolumeUI:meters];
-     }
      success:^(NSData *recordData){
          NSLog(@"录音成功");
      }
@@ -52,6 +58,10 @@ static RecordingHelper* instance;
 
 }
 
+- (void) StopPlay
+{
+    [self.player stopPlay];
+}
 
 - (void) StopRecording
 {
@@ -61,12 +71,7 @@ static RecordingHelper* instance;
 - (void) PlayAudio:(NSString *) path
 {
     [self.player
-     startPlayAudioFile:[PLAudioPath recordPathOriginTest]
-     updateMeters:^(float meters)
-     {
-         [self updateVolumeUI:meters];
-         
-     }
+     startPlayAudioFile:[PLAudioPath recordPathOrigin:path]
      success:^
      {
          NSLog(@"播放成功");

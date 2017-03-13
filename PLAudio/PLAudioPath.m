@@ -10,6 +10,7 @@
 #import <sys/xattr.h>
 @implementation PLAudioPath
 
+//just for test
 + (NSString *)recordPathOriginTest{
     NSString * filePath;
     NSFileManager *fileManager = [NSFileManager defaultManager];
