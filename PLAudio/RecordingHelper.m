@@ -40,6 +40,15 @@ static RecordingHelper* instance;
     }];
 }
 
+- (void) PauseRecording
+{
+    [self.recorder pauseRecord];
+}
+
+- (void) ResumeRecording
+{
+    [self.recorder resumeRecord];
+}
 
 - (void) StartRecording:(NSString *) fullPath
 {

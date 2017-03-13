@@ -194,6 +194,16 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
     
 }
 
+- (void)pauseRecord
+{
+    [self.recorder pause];
+}
+
+- (void)resumeRecord
+{
+    [self.recorder record];
+}
+
 
 - (void)stopTimer
 {

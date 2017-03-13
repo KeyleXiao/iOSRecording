@@ -94,17 +94,44 @@
     [resume addTarget:self action:@selector(ResumeBtAction) forControlEvents:UIControlEventTouchUpInside];
     resume.backgroundColor=[UIColor colorWithRed:0.37 green:0.75 blue:0.38 alpha:1];
     [resume setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    UIButton *pauseRecord=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:pauseRecord];
+    pauseRecord.frame=CGRectMake(160, 300, 100, 40);
+    [pauseRecord setTitle:@"暂停录制" forState:UIControlStateNormal];
+    [pauseRecord addTarget:self action:@selector(PauseRecording) forControlEvents:UIControlEventTouchUpInside];
+    pauseRecord.backgroundColor=[UIColor colorWithRed:0.37 green:0.75 blue:0.38 alpha:1];
+    [pauseRecord setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    UIButton* resumeRecord=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:resumeRecord];
+    resumeRecord.frame=CGRectMake(50, 360, 100, 40);
+    [resumeRecord setTitle:@"恢复录制" forState:UIControlStateNormal];
+    [resumeRecord addTarget:self action:@selector(ResumeRecording) forControlEvents:UIControlEventTouchUpInside];
+    resumeRecord.backgroundColor=[UIColor colorWithRed:0.37 green:0.75 blue:0.38 alpha:1];
+    [resumeRecord setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+-(void)PauseRecording
+{
+    self.display.text = @"暂停录音。。。。";
+    [helper PauseRecording];
+}
+-(void)ResumeRecording
+{
+    self.display.text = @"恢复录音。。。。";
+    [helper ResumeRecording];
 }
 
 -(void)PauseBtAction
 {
-    self.display.text = @"暂停。。。。";
-    [helper.player pausePlay];
+    self.display.text = @"暂停播放。。。。";
+    [helper PausePlay];
 }
 -(void)ResumeBtAction
 {
     self.display.text = @"恢复播放。。。。";
-    [helper.player resumePlay];
+    [helper ResumePlay];
 }
 
 
