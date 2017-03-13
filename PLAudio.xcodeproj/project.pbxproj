@@ -20,16 +20,6 @@
 		2F4A43F41E640AF400677F4B /* RecordingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A43F31E640AF400677F4B /* RecordingHelper.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0A7F94921B21A976008CA16A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0A7F94701B21A976008CA16A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0A7F94771B21A976008CA16A;
-			remoteInfo = PLAudio;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		0A7F94781B21A976008CA16A /* PLAudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLAudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7F947C1B21A976008CA16A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,7 +29,6 @@
 		0A7F94861B21A976008CA16A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A7F94881B21A976008CA16A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0A7F948B1B21A976008CA16A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		0A7F94911B21A976008CA16A /* PLAudioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLAudioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7F94961B21A976008CA16A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A7F94BD1B21A9EB008CA16A /* PLAudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLAudioPlayer.h; sourceTree = "<group>"; };
 		0A7F94BE1B21A9EB008CA16A /* PLAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLAudioPlayer.m; sourceTree = "<group>"; };
@@ -67,13 +56,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0A7F948E1B21A976008CA16A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -92,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				0A7F94781B21A976008CA16A /* PLAudio.app */,
-				0A7F94911B21A976008CA16A /* PLAudioTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,24 +155,6 @@
 			productReference = 0A7F94781B21A976008CA16A /* PLAudio.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0A7F94901B21A976008CA16A /* PLAudioTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0A7F949E1B21A976008CA16A /* Build configuration list for PBXNativeTarget "PLAudioTests" */;
-			buildPhases = (
-				0A7F948D1B21A976008CA16A /* Sources */,
-				0A7F948E1B21A976008CA16A /* Frameworks */,
-				0A7F948F1B21A976008CA16A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0A7F94931B21A976008CA16A /* PBXTargetDependency */,
-			);
-			name = PLAudioTests;
-			productName = PLAudioTests;
-			productReference = 0A7F94911B21A976008CA16A /* PLAudioTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -210,10 +173,6 @@
 							};
 						};
 					};
-					0A7F94901B21A976008CA16A = {
-						CreatedOnToolsVersion = 6.3.2;
-						TestTargetID = 0A7F94771B21A976008CA16A;
-					};
 				};
 			};
 			buildConfigurationList = 0A7F94731B21A976008CA16A /* Build configuration list for PBXProject "PLAudio" */;
@@ -230,7 +189,6 @@
 			projectRoot = "";
 			targets = (
 				0A7F94771B21A976008CA16A /* PLAudio */,
-				0A7F94901B21A976008CA16A /* PLAudioTests */,
 			);
 		};
 /* End PBXProject section */
@@ -243,13 +201,6 @@
 				0A7F94871B21A976008CA16A /* Main.storyboard in Resources */,
 				0A7F948C1B21A976008CA16A /* LaunchScreen.xib in Resources */,
 				0A7F94891B21A976008CA16A /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0A7F948F1B21A976008CA16A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,22 +221,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0A7F948D1B21A976008CA16A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0A7F94931B21A976008CA16A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0A7F94771B21A976008CA16A /* PLAudio */;
-			targetProxy = 0A7F94921B21A976008CA16A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0A7F94851B21A976008CA16A /* Main.storyboard */ = {
@@ -427,40 +363,6 @@
 			};
 			name = Release;
 		};
-		0A7F949F1B21A976008CA16A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PLAudioTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PLAudio.app/PLAudio";
-			};
-			name = Debug;
-		};
-		0A7F94A01B21A976008CA16A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PLAudioTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PLAudio.app/PLAudio";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -478,15 +380,6 @@
 			buildConfigurations = (
 				0A7F949C1B21A976008CA16A /* Debug */,
 				0A7F949D1B21A976008CA16A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0A7F949E1B21A976008CA16A /* Build configuration list for PBXNativeTarget "PLAudioTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0A7F949F1B21A976008CA16A /* Debug */,
-				0A7F94A01B21A976008CA16A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
