@@ -137,15 +137,15 @@ static RecordingHelper* instance;
 bool isRecording;
 
 
-void StartRecording(void *p)
+void StartRecording(void* p)
 {
     if (isRecording){
         return;
     }
     
-    NSLog(@"%@", [NSString stringWithUTF8String:p]);
+    NSLog(@"%@", [NSString stringWithUTF8String: p]);
     
-    [[RecordingHelper ShareInstance] StartRecording: [NSString stringWithUTF8String:p]];
+    [[RecordingHelper ShareInstance] StartRecording: [NSString stringWithUTF8String: p]];
     isRecording = true;
 }
 
@@ -157,12 +157,38 @@ void StopRecording()
     [[RecordingHelper ShareInstance] StopRecording];
 }
 
-const char* GetDeviceAudio (void*p)
+void PauseRecording()
+{
+    [[RecordingHelper ShareInstance] PauseRecording];
+}
+void ResumeRecording()
+{
+    [[RecordingHelper ShareInstance] ResumeRecording];
+}
+
+void StartPlay(void* p)
+{
+    [[RecordingHelper ShareInstance] PlayAudio:[NSString stringWithUTF8String:p]];
+}
+void StopPlay()
+{
+    [[RecordingHelper ShareInstance] StopPlay];
+}
+void PausePlay()
+{
+    [[RecordingHelper ShareInstance] PausePlay];
+}
+void ResumePlay()
+{
+    [[RecordingHelper ShareInstance] ResumePlay];
+}
+
+const char* GetDeviceAudio (void* p)
 {
     return [[[RecordingHelper ShareInstance] GetDeviceAudio:[NSString stringWithUTF8String:p]] UTF8String];
 }
 
-void DeleteDeviceAudio(void*p)
+void DeleteDeviceAudio(void* p)
 {
     [[RecordingHelper ShareInstance] DeleteDeviceAudio:[NSString stringWithUTF8String:p]];
 }
