@@ -9,7 +9,6 @@
 #ifndef AudioDemo_Header_h
 #define AudioDemo_Header_h
 #import <Foundation/Foundation.h>
-#import "PLAudioPath.h"
 
 #define HScreen [[UIScreen mainScreen] bounds].size.height
 #define WScreen [[UIScreen mainScreen] bounds].size.width

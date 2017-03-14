@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "RecordingHelper.h"
+#import "PLAudioPath.h"
 
 @interface ViewController (){
     

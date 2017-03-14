@@ -183,11 +183,21 @@ void ResumePlay()
     [[RecordingHelper ShareInstance] ResumePlay];
 }
 
-const char* GetDeviceAudio (void* p)
+// Helper method to create C string copy
+char* MakeStringCopy (const char* string)
 {
-    return [[[RecordingHelper ShareInstance] GetDeviceAudio:[NSString stringWithUTF8String:p]] UTF8String];
+    if (string == NULL)
+    return NULL;
+    
+    char* res = (char*)malloc(strlen(string) + 1);
+    strcpy(res, string);
+    return res;
 }
 
+const char* GetDeviceAudio (void* p)
+{
+    return MakeStringCopy([[[RecordingHelper ShareInstance] GetDeviceAudio:[NSString stringWithUTF8String:p]] UTF8String]);
+}
 void DeleteDeviceAudio(void* p)
 {
     [[RecordingHelper ShareInstance] DeleteDeviceAudio:[NSString stringWithUTF8String:p]];

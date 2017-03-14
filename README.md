@@ -5,81 +5,38 @@
 感谢原作者的付出。
  
 # 简单说明
+由于最终需要集成到UNITY3D，所以我新建并修改了大量内容。请参见 AudioHelper.m 文件。
 
-#### PLAudioPlayer类的使用
-
-PLAudioPlayer类是音频播放的类，首先需要初始化。
-
-```
-	audioRecorder = [[PLAudioRecorder alloc] init];
-```
-
-PLAudioPlayer类提供播放音频和停止播放的方法，
+在CSharp文件内 你只需要使用如下脚本,便可以实现大部分的录音功能
 
 ```
-    // 播放音频
-	
-    - (void)startPlayAudioFile:(NSString *)fileName
-	updateMeters:(AudioPlayerWithMeters)meters
-                   success:(AudioPlayerSuccess)success
-                    failed:(AudioPlayerFailed)failed ;
+	[DllImport("__Internal")]
+	private static extern void StartRecording(string p);
 
-	// 停止播放
-	- (void)stopPlay;
-```
+	[DllImport("__Internal")]
+	private static extern void StopRecording();
 
+	[DllImport("__Internal")]
+	private static extern void PauseRecording();
 
-startPlayAudioFile使用如下
-```
- 
-    [audioPlayer startPlayAudioFile:[PLAudioPath recordPathOriginToAMR]
-                       updateMeters:^(float meters){
-                           //实时返回播放时声音的平均功率
-                       }
-                                 success:^{
-                                     // 播放成功
-                                 } failed:^(NSError *error) {
-                                     // 播放失败
-                                 } ];
+	[DllImport("__Internal")]
+	private static extern void ResumeRecording();
 
+	[DllImport("__Internal")]
+	private static extern string GetDeviceAudio(string p);
 
-```                                     
-   
-   
-   
-#### PLAudioPlayer类的使用
+	[DllImport("__Internal")]
+	private static extern void DeleteDeviceAudio(string p);
 
-```
-PLAudioPlayer类是音频录制的类，首先需要初始化，初始化时，默认在录制为WAV格式。
+	[DllImport("__Internal")]
+	private static extern void StartPlay(string p);
 
-    audioPlayer = [[PLAudioPlayer alloc] init];
- 
-    
-PLAudioPlayer类提供开始录音和结束录音的方法，
+	[DllImport("__Internal")]
+	private static extern void StopPlay();
 
-    - (void)startRecordWithFilePath:(NSString *)path
-                   updateMeters:(RecordWithMeters)meters
-                        success:(RecordSuccess)success
-                         failed:(RecordFailed)failed;//开始录音
+	[DllImport("__Internal")]
+	private static extern void PausePlay();
 
-    - (void)stopRecord;//结束录音
-
-
-```
-
-startRecordWithFilePath使用如下
-
-```
-    [audioRecorder startRecordWithFilePath:[PLAudioPath recordPathOrigin]
-                                   updateMeters:^(float meters){
-                                       //实时返回录制时声音的平均功率
-                                   }
-                                        success:^(NSData *recordData){
-                                            //录音成功
-                                        }
-                                         failed:^(NSError *error){
-                                                  //录音失败
-                                         }];
-                                        
-
+	[DllImport("__Internal")]
+	private static extern void ResumePlay();
 ```
