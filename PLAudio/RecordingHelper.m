@@ -128,7 +128,9 @@ static RecordingHelper* instance;
 
 - (void) DeleteDeviceAudio:(NSString*) audioFullName
 {
-    [self.fileManager removeItemAtPath:audioFullName error:NULL];
+    if ([self.fileManager fileExistsAtPath:audioFullName]) {
+        [self.fileManager removeItemAtPath:audioFullName error:NULL];
+    }
 }
 
 @end
@@ -145,7 +147,11 @@ void StartRecording(void* p)
     
     NSLog(@"%@", [NSString stringWithUTF8String: p]);
     
-    [[RecordingHelper ShareInstance] StartRecording: [NSString stringWithUTF8String: p]];
+    NSString* fullNamePath = [NSString stringWithUTF8String: p];
+    
+    [[RecordingHelper ShareInstance] DeleteDeviceAudio:fullNamePath];
+    [[RecordingHelper ShareInstance] StartRecording: fullNamePath];
+    
     isRecording = true;
 }
 
@@ -154,7 +160,9 @@ void StopRecording()
     if (!isRecording) {
         return;
     }
+    
     [[RecordingHelper ShareInstance] StopRecording];
+    isRecording = false;
 }
 
 void PauseRecording()

@@ -83,31 +83,22 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
    
     self.recordSuccess = success;
     self.recordFailed = failed;
-//    self.recordMeters = meters;
     self.recordPath = path;
    
     if (self.isEnableMic) {
-        /**
-         *
-         * 在iOS5真机测试，使用async方式调用将会出现在[self.recorder record]方法crash
-         * 因此在iOS5上改为主线程调用。
-         */
-        if ([[[UIDevice currentDevice]systemVersion] hasPrefix:@"5."]) {
+        
+        // 放在异步线程执行是为了加快首次调用的速度
+        static BOOL isFirst = YES;
+        if (isFirst == NO) {
             [self recordWithFilePath:path];
         } else {
-            
-            // 放在异步线程执行是为了加快首次调用的速度
-            
-            static BOOL isFirst = YES;
-            if (isFirst == NO) {
+            dispatch_queue_t record_queue = dispatch_queue_create("record_queue", nil);
+            dispatch_async(record_queue, ^{
                 [self recordWithFilePath:path];
-            } else {
-                dispatch_queue_t record_queue = dispatch_queue_create("record_queue", nil);
-                dispatch_async(record_queue, ^{
-                    [self recordWithFilePath:path];
-                    isFirst = NO;
-                });
-            }}
+                isFirst = NO;
+            });
+        }
+        
     } else {
         self.recordFailed([NSError errorWithDomain:RecordErrorPermissionDenied
                                               code:-1
@@ -176,10 +167,10 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
             self.recordTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
             dispatch_source_set_timer(self.recordTimer, DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
             
-//            dispatch_source_set_event_handler(self.recordTimer, ^{
-//                [self.recorder updateMeters];
+            dispatch_source_set_event_handler(self.recordTimer, ^{
+                [self.recorder updateMeters];
 //                self.recordMeters([self.recorder averagePowerForChannel:0]);
-//            });
+            });
             
             dispatch_resume(self.recordTimer);
         }
