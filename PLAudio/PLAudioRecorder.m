@@ -221,7 +221,9 @@ NSString * const RecordErrorPermissionDenied = @"RecordErrorPermissionDenied";
             self.recordSuccess(data);
         }
     }
-    [[AVAudioSession sharedInstance] setActive:NO error:nil];
+    
+    // 如果是直接放到unity项目调用 这里需要注释
+    //[[AVAudioSession sharedInstance] setActive:NO error:nil];
     [self stopTimer];
 
 }

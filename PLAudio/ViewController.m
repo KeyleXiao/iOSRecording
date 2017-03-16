@@ -21,6 +21,11 @@
 
 @implementation ViewController
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -86,7 +91,7 @@
     [pauseBt addTarget:self action:@selector(PauseBtAction) forControlEvents:UIControlEventTouchUpInside];
     pauseBt.backgroundColor=[UIColor colorWithRed:0.37 green:0.75 blue:0.38 alpha:1];
     [pauseBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
+    
     
     UIButton *resume=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:resume];
